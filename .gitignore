@@ -34,3 +34,8 @@ target/
 # Eclipse settings
 .metadata/
 .settings/
+
+# Eclipse specific
+.classpath
+.project
+.factorypath
