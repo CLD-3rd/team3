@@ -31,4 +31,5 @@ replay_pid*
 /target/
 
 # Eclipse settings
+.metadata/
 .settings/
