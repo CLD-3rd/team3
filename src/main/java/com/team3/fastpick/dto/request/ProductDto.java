@@ -5,7 +5,9 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class productDto {
+public class ProductDto {
     private String name;
-    private String image_url;
+    private String imageUrl;
+    private Long pidx;
+    
 }

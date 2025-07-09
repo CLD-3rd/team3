@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>응모 페이지</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+
+</head>
+<body>
+
+    <main>
+        <!-- 응모 진행 중인 상품 -->
+        <h2 class="section-title">응모 진행 중인 상품</h2>
+        <div class="product-container in-progress">
+            <div class="product-card" th:each="product : ${inProgressProducts}">
+                <div class="badge badge-active">NEW</div>
+                <img th:src="@{${product.imageUrl}}" alt="상품 사진">
+                <p th:text="${product.name}">상품명</p>
+                <a th:href="@{/draw-page}">
+                    <button type="button">응모하기</button>
+                </a>
+            </div>
+        </div>
+
+        <!-- 응모 완료된 상품 -->
+        <h2 class="section-title">응모 완료된 상품</h2>
+        <div class="product-container">
+            <div class="product-card" th:each="product : ${completedProducts}">
+                <img th:src="@{${product.imageUrl}}" alt="상품 사진">
+                <p th:text="${product.name}">상품명</p>
+                <button disabled>응모 완료</button>
+            </div>
+        </div>
+
+    </main>
+
+</body>
+</html>
