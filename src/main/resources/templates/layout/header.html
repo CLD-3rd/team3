@@ -8,12 +8,18 @@
 <div th:fragment="header">
     <header class="header">
         <div class="header-left">
-            <img th:src="@{/images/fastpick.png}" alt="FastPick Logo" />
-            <span class="brand-name">FastPick</span>
+            <a th:href="@{/main-page}" class="header-logo">
+                <img th:src="@{/images/fastpick.png}" alt="FastPick Logo" />
+                <span class="brand-name">FastPick</span>
+            </a>
         </div>
         <div class="header-right">
-            <button>회원가입</button>
+            <a th:href="@{/sign-up}">
+                <button>회원가입</button>
+            </a>
+            <a th:href="@{/login}">
             <button>로그인</button>
+            </a>
         </div>
     </header>
 </div>
