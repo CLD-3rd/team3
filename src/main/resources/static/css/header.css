@@ -15,35 +15,41 @@
   margin-bottom: 40px;
 }
 
+.header-left img {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  transform: translateY(10px);
+}
+
 .header-left {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.header-left img {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-  transform: scale(1.5);
-}
-
-
 .brand-name {
   color: #B1C9FF;
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 600;
   font-family: sans-serif;
+  line-height: 48px; /* 로고 높이와 동일 */
 }
+
 
 .header-right {
   display: flex;
-  gap: 10px;
+  align-items: center;
+  gap: 30px;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 20px; /* 회원가입 <-> 로그인 간격 */
 }
 
 .header-right button {
   padding: 12px 28px;
-  min-width: 140px;
   background-color: #eaeaea;
   color: #000000;
   border: none;
@@ -51,23 +57,28 @@
   font-size: 16px;
   cursor: pointer;
   white-space: nowrap;
-    width: auto;
-    min-width: unset;
+  min-width: 140px;
 }
 
 .header-right button:hover {
   background-color: #d5d5d5;
 }
 
-.header-right {
+/* 로그인 시 이름 스타일 */
+.login-info {
   display: flex;
+  align-items: center;
   gap: 50px;
 }
 
-.header-left a.header-logo {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  gap: 10px;
-}
 
+
+.username {
+  color: #4dabff;     /* FastPick 로고 텍스트 색상과 동일 */
+  font-size: 28px;    /* FastPick 글자 크기와 동일 */
+  font-weight: 600;
+  font-family: sans-serif;
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+}
