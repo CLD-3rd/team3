@@ -1,11 +1,19 @@
 package com.team3.fastpick.service;
 
+import java.time.LocalDateTime;
+
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import com.team3.fastpick.dto.DrawInfo;
 import com.team3.fastpick.dto.response.DrawResponse;
+import com.team3.fastpick.entity.Product;
+import com.team3.fastpick.repository.ProductRepository;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class DrawService {
     private static final String ATTEMPT_PREFIX = "draw:";             // 응모 기록
     private static final String COUNT_PREFIX = "draw_count:";         // 응모 카운트
@@ -13,10 +21,11 @@ public class DrawService {
     private static final int MAX_COUNT = 3;
 
     private final RedisTemplate<String, Object> redisTemplate;
+    private final ProductRepository productRepository;
 
-    public DrawService(RedisTemplate<String, Object> redisTemplate) {
-        this.redisTemplate = redisTemplate;
-    }
+//    public DrawService(RedisTemplate<String, Object> redisTemplate) {
+//        this.redisTemplate = redisTemplate;
+//    }
 
     public DrawResponse requestDraw(int productId, int userId) {
         
@@ -66,6 +75,14 @@ public class DrawService {
     private void recordUserParticipation(String userSetKey, int userId) {
         redisTemplate.opsForSet().add(userSetKey, userId);
     }
+
+	public DrawInfo getDrawInfo(Long productId) {
+		Product product = productRepository.findById(productId)
+				.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상품입니다."));
+		return DrawInfo.builder().drawTime(LocalDateTime.now())
+				.productName(product.getName())
+				.build();
+	}
 }
 
 

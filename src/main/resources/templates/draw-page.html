@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>응모 페이지</title>
+    <style>
+        .draw-box {
+            border: 1px solid black;
+            width: 400px;
+            padding: 20px;
+            margin: 100px auto;
+            text-align: center;
+            font-size: 18px;
+            box-shadow: 2px 2px 5px #aaa;
+        }
+
+        .submit-btn {
+            margin: 30px auto;
+            display: block;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #ddd;
+            border: none;
+            cursor: pointer;
+        }
+
+        select {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #ddd;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <form action="/draw" method="post">
+        <div class="draw-box">
+            <div>당첨 일자: <span th:text="${#temporals.format(drawInfo.drawTime, 'yyyy-MM-dd')}">2025-07-16</span></div>
+            <div>상품명: <span th:text="${drawInfo.productName}">TEST PRODUCT</span></div>
+            <div>사이즈 선택</div>
+            <select name="size">
+                <option value="free">free</option>
+                <!-- 필요시 다른 사이즈도 추가 가능 -->
+            </select>
+
+            <!-- 숨겨진 상품 ID 및 유저 ID 전달 (예시용) -->
+            <input type="hidden" name="pidx" value="1"/>
+            <input type="hidden" name="uidx" value="42"/>
+        </div>
+
+        <button type="submit" class="submit-btn">응모 완료하기</button>
+    </form>
+
+</body>
+</html>
