@@ -39,3 +39,5 @@ target/
 .classpath
 .project
 .factorypath
+
+*.properties
