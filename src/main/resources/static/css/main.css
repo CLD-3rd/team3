@@ -1,9 +1,15 @@
 /* participation.css */
 
+body {
+  margin: 0;
+  padding: 0;
+}
+
 main {
     max-width: 1200px;
     margin: 0 auto;     /* 가운데 정렬 */
     padding: 0 40px;    /* 좌우 여백 */
+    margin-bottom: 20px;
 }
 
 .product-container {

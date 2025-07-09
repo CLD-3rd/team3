@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>응모 페이지</title>
     <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
 
 </head>
 <body>
@@ -33,6 +34,9 @@
         </div>
 
     </main>
+    
+    <!-- footer -->
+    <th:block th:replace="layout/footer :: footerFragment"></th:block>
 
 </body>
 </html>
