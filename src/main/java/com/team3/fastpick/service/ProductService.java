@@ -1,6 +1,6 @@
 package com.team3.fastpick.service;
 
-import com.team3.fastpick.dto.request.productDto;
+import com.team3.fastpick.dto.request.ProductDto;
 import com.team3.fastpick.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,9 +12,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ProductService {
     private final ProductRepository productRepository;
-    public List<productDto> getAllProducts() {
+    public List<ProductDto> getAllProducts() {
         return productRepository.findAll().stream()
-                .map(p -> new productDto(p.getName(), p.getImageUrl()))
+                .map(p -> new ProductDto(p.getName(), p.getImageUrl(), p.getPidx()))
                 .collect(Collectors.toList());
     }
 }
