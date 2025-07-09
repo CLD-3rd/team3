@@ -31,11 +31,18 @@ public class UserController {
 	    User user = userService.login(id, password);
 	    if (user != null) {
 	        session.setAttribute("loginUser", user);
-	        return "redirect:/main"; // 로그인 성공 시 이동할 페이지
+	        return "redirect:/main";
 	    } else {
 	        model.addAttribute("error", "가입하지 않은 아이디이거나 잘못된 비밀번호입니다.");
-	        return "login"; // 다시 로그인 페이지로
+	        return "login";
+	        
 	    }
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+	    session.invalidate();
+	    return "redirect:/login";
 	}
 	
 }
