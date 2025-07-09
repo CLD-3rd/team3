@@ -40,9 +40,6 @@ target/
 .project
 .factorypath
 
-<<<<<<< HEAD
-*.properties
-=======
 # Ignore all .properties files in resources
-src/main/resources/*.properties
->>>>>>> origin/dev
+*.properties
+
