@@ -41,4 +41,5 @@ target/
 .factorypath
 
 # Ignore all .properties files in resources
-src/main/resources/*.properties
+# *.properties
+
