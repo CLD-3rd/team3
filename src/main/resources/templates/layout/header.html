@@ -12,8 +12,12 @@
             <span class="brand-name">FastPick</span>
         </div>
         <div class="header-right">
-            <button>회원가입</button>
+            <a th:href="@{/sign-up}">
+                <button>회원가입</button>
+            </a>
+            <a th:href="@{/draw-page}">
             <button>로그인</button>
+            </a>
         </div>
     </header>
 </div>
