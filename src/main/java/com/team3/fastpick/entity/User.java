@@ -1,5 +1,6 @@
 package com.team3.fastpick.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,6 +20,7 @@ import lombok.NoArgsConstructor;
 public class User {
 	
 	@Id
+	@Column(name = "uidx")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long uidx;
 	
