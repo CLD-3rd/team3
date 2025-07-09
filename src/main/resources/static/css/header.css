@@ -45,7 +45,7 @@
 
 .auth-buttons {
   display: flex;
-  gap: 20px; /* 회원가입 <-> 로그인 간격 */
+  gap: 20px; /* 회원가입<->로그인 간격 */
 }
 
 .header-right button {

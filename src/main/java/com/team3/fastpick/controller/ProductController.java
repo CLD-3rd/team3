@@ -56,24 +56,11 @@ public class ProductController {
         }
 
         // 로그인 되어있으면 응모 처리 진행
-        // 예: productService.apply(pidx, loginUser.getUid());
         System.out.println("응모 처리됨: pidx = " + pidx + ", uid = " + loginUser.getUidx());
 
         return "redirect:/draw-page";
     }
     
-    //return html 이름으로 변경 
-//    @GetMapping("/draw-page")
-//    public String showDrawPage() {
-//        return "draw"; // → templates/draw.html로 이동
-//    }
 }
 
 
-
-//// 로그인 여부 확인
-//User loginUser = (User) session.getAttribute("loginUser");
-//if (loginUser == null) {
-//    session.setAttribute("returnTo", "/main-page"); // 이전 경로 저장
-//    return "redirect:/login";
-//}
