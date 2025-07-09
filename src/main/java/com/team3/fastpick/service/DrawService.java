@@ -7,26 +7,46 @@ import com.team3.fastpick.dto.response.DrawResponse;
 
 @Service
 public class DrawService {
-    private static final String KEY_PREFIX = "draw:count:";
+    private static final String ATTEMPT_PREFIX = "draw:";             // 응모 기록
+    private static final String COUNT_PREFIX = "draw_count:";         // 응모 카운트
     private static final int MAX_COUNT = 10;
 
-    private final RedisTemplate<String, Integer> redis;
+    private final RedisTemplate<String, Object> redisTemplate;
 
-    public DrawService(RedisTemplate<String, Integer> redis) {
-        this.redis = redis;
+    public DrawService(RedisTemplate<String, Object> redisTemplate) {
+        this.redisTemplate = redisTemplate;
     }
 
-    public DrawResponse enterDraw(int pidx, int uidx) {
-        String key = KEY_PREFIX + uidx;
-        // Redis의 INCR (opsForValue().increment) 로 원자적 증분
-        Long newCount = redis.opsForValue().increment(key, 1);
+    public DrawResponse requestDraw(int productId, int userId) {
+        String countKey = buildCountKey(productId);
+        Long currentCount = incrementCount(countKey);
 
-        if (newCount > MAX_COUNT) {
-            // 한도 초과하면 되돌리기
-            redis.opsForValue().decrement(key, 1);
-            return new DrawResponse(false,
-                    "이미 응모 횟수 10회를 모두 사용하셨습니다.");
+        if (currentCount > MAX_COUNT) {
+            decrementCount(countKey);
+            return new DrawResponse(false, "이미 해당 상품에 대한 응모 횟수 한도를 초과했습니다.");
         }
-		return new DrawResponse(true, "응모가 성공적으로 완료되었습니다.");
+
+        saveUserAttempt(productId, currentCount, userId);
+        return new DrawResponse(true, "응모 성공. 현재 전체 응모 수: " + currentCount);
+    }
+
+    private String buildCountKey(int productId) {
+        return COUNT_PREFIX + productId;
+    }
+
+    private Long incrementCount(String countKey) {
+        return redisTemplate.opsForValue().increment(countKey);
+    }
+
+    private void decrementCount(String countKey) {
+        redisTemplate.opsForValue().decrement(countKey);
+    }
+
+    private void saveUserAttempt(int productId, Long attemptNumber, int userId) {
+        String attemptKey = ATTEMPT_PREFIX + productId + ":" + attemptNumber;
+        redisTemplate.opsForValue().set(attemptKey, String.valueOf(userId));
     }
 }
+
+
+
