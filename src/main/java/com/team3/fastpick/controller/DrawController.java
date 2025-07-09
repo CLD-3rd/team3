@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.team3.fastpick.dto.DrawInfo;
 import com.team3.fastpick.dto.request.DrawRequest;
 import com.team3.fastpick.dto.response.DrawResponse;
+import com.team3.fastpick.entity.User;
 import com.team3.fastpick.service.DrawService;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -27,7 +29,14 @@ public class DrawController {
     }
 	
 	@GetMapping("/draw-page")
-	public String drawPageForm(Model model) {
+	public String drawPageForm(HttpSession session, Model model) {
+		
+		// 로그인한 사용자 정보 꺼내기
+	    User user = (User) session.getAttribute("loginUser");
+	    if (user != null) {
+	        model.addAttribute("uidx", user.getUidx()); // user의 id만 model에 추가
+	    }
+		
 		DrawInfo drawInfo = drawService.getDrawInfo(pidx);
 		model.addAttribute("drawInfo", drawInfo);
 		return "drawInfo";

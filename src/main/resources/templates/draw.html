@@ -11,8 +11,11 @@
         alert(message);
 
         if (success) {
-            window.location.href = "/main";
+            window.location.href = "/main-page";
         }
+		if (!success) {
+			window.location.href = "/draw-page";
+		}
         /*]]>*/
     </script>
 </head>
