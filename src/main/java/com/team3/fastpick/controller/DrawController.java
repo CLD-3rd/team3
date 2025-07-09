@@ -1,6 +1,5 @@
 package com.team3.fastpick.controller;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,9 +19,6 @@ public class DrawController {
 	@PostMapping("/draw")
     public ResponseEntity<DrawResponse> draw(@RequestBody DrawRequest req) {
         DrawResponse resp = drawService.requestDraw(req.getPidx(), req.getUidx());
-        if (!resp.isSuccess()) {
-            return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body(resp);
-        }
         return ResponseEntity.ok(resp);
     }
 }
