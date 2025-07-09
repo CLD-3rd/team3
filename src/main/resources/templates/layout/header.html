@@ -14,14 +14,25 @@
             </a>
         </div>
         <div class="header-right">
-            <a th:href="@{/sign-up}">
-                <button>회원가입</button>
-            </a>
-            <a th:href="@{/login}">
-            <button>로그인</button>
-            </a>
+            <!-- 로그인 상태일 때 -->
+            <div th:if="${loginUser != null}" class="login-info">
+                <span class="username" th:text="${loginUser.name} + '님'"></span>
+                <a th:href="@{/logout}">
+                    <button>로그아웃</button>
+                </a>
+            </div>
+            <!-- 비로그인 상태일 때 -->
+            <div th:if="${loginUser == null}" class="auth-buttons">
+                <a th:href="@{/sign-up}">
+                    <button>회원가입</button>
+                </a>
+                <a th:href="@{/login}">
+                    <button>로그인</button>
+                </a>
+            </div>
         </div>
     </header>
 </div>
 </body>
 </html>
+
