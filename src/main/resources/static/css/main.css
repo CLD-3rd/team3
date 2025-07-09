@@ -122,3 +122,10 @@ a {
 }
 
 
+.gray-input {
+    background-color: gainsboro !important;
+}
+
+.spacing {
+    margin-bottom: 10px;
+}
