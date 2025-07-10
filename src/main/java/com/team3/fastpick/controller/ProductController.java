@@ -26,11 +26,11 @@ public class ProductController {
         List<ProductDto> allProducts = productService.getAllProducts();
 
         List<ProductDto> inProgressProducts = allProducts.stream()
-                .filter(product -> product.getPidx() == 1)
+                .filter(product -> product.getOpen())
                 .collect(Collectors.toList());
 
         List<ProductDto> completedProducts = allProducts.stream()
-                .filter(product -> product.getPidx() != 1)
+                .filter(product -> !product.getOpen())
                 .collect(Collectors.toList());
 
         model.addAttribute("inProgressProducts", inProgressProducts);
