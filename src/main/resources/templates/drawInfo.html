@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>응모 페이지</title>
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    
     <style>
         .draw-box {
             border: 1px solid black;
@@ -30,26 +33,48 @@
             background-color: #ddd;
             font-size: 16px;
         }
+        
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1;
+        }
+        
     </style>
 </head>
 <body>
+	
+    <div th:replace="layout/header :: header"></div>
 
-    <form action="/draw" method="post">
-        <div class="draw-box">
-            <div>당첨 일자: <span th:text="${#temporals.format(drawInfo.drawTime, 'yyyy-MM-dd')}">2025-07-16</span></div>
-            <div>상품명: <span th:text="${drawInfo.productName}">TEST PRODUCT</span></div>
-            <div>사이즈 선택</div>
-            <select name="size">
-                <option value="free">FREE</option>
-            </select>
-
-            <!-- 숨겨진 상품 ID 및 유저 ID 전달 (예시용) -->
-            <input type="hidden" name="pidx" value="1"/>
-			<input type="hidden" name="uidx" th:value="${uidx}"/>
-        </div>
-
-        <button type="submit" class="submit-btn">응모 완료하기</button>
-    </form>
+	<main>
+	    <form action="/draw" method="post">
+	        <div class="draw-box">
+	            <div>당첨 일자: <span th:text="${#temporals.format(drawInfo.drawTime, 'yyyy-MM-dd')}">2025-07-16</span></div>
+	            <div>상품명: <span th:text="${drawInfo.productName}">TEST PRODUCT</span></div>
+	            <div>사이즈 선택</div>
+	            <select name="size">
+	                <option value="free">FREE</option>
+	            </select>
+	
+	            <!-- 숨겨진 상품 ID 및 유저 ID 전달 (예시용) -->
+	            <input type="hidden" name="pidx" value="1"/>
+				<input type="hidden" name="uidx" th:value="${uidx}"/>
+	        </div>
+	
+	        <button type="submit" class="submit-btn">응모 완료하기</button>
+	    </form>
+    </main>
+    
+    <th:block th:replace="layout/footer :: footerFragment"></th:block>
 
 </body>
 </html>
