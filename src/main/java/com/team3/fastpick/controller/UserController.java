@@ -55,7 +55,8 @@ public class UserController {
     @ResponseBody
     public String signup(
             @RequestParam("id") String id,
-            @RequestParam("password") String password) {
+            @RequestParam("password") String password,
+            @RequestParam("name") String name) {
 
         System.out.println("넘어온 id: " + id);
 
@@ -67,6 +68,7 @@ public class UserController {
             User user = User.builder()
                     .id(id)
                     .password(password)
+                    .name(name)
                     .build();
 
             userService.signup(user);
