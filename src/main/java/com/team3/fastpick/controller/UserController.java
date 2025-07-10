@@ -31,9 +31,7 @@ public class UserController {
 	    User user = userService.login(id, password);
 	    if (user != null) {
 	        session.setAttribute("loginUser", user);
-
 	        return "redirect:/main-page";
-
 	    } else {
 	        model.addAttribute("error", "가입하지 않은 아이디이거나 잘못된 비밀번호입니다.");
 	        return "login";

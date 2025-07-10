@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: always
+    volumes:
+      - redis_volume_data:/data
+    ports:
+      - 6379:6379
+
+  redis-insight:
+    image: redislabs/redisinsight:latest
+    container_name: redis_insight
+    restart: always
+    ports:
+      - 5540:5540
+    volumes:
+      - redis_insight_volume_data:/db
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpw
+      MYSQL_DATABASE: fastpick
+      MYSQL_USER: fastpick
+      MYSQL_PASSWORD: fastpick
+    volumes:
+      - mysql_volume_data:/var/lib/mysql
+    restart: unless-stopped
+
+volumes:
+  redis_volume_data:
+  redis_insight_volume_data:
+  mysql_volume_data:

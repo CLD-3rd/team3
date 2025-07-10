@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Draw Result</title>
+    <meta charset="UTF-8">
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        let success = /*[[${drawResponse.success}]]*/ false;
+        let message = /*[[${drawResponse.message}]]*/ "";
+
+        alert(message);
+
+
+        window.location.href = "/main-page";
+
+        /*]]>*/
+    </script>
+</head>
+<body>
+    <h1>Draw Result</h1>
+</body>
+</html>
