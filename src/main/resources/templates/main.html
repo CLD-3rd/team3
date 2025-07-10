@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>응모 페이지</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+
+</head>
+<body>
+
+    <div th:replace="layout/header :: header"></div>
+
+    <main>
+        <!-- 응모 진행 중인 상품 -->
+        <h2 class="section-title">응모 진행 중인 상품</h2>
+        <div class="product-container in-progress">
+            <div class="product-card" th:each="product : ${inProgressProducts}">
+                <div class="badge badge-active">NEW</div>
+                <img th:src="@{${product.imageUrl}}" alt="상품 사진">
+                <p th:text="${product.name}">상품명</p>
+                <form th:action="@{'/apply/' + ${product.pidx}}" method="post">
+    				<button type="submit">응모하기</button>
+				</form>
+
+            </div>
+        </div>
+
+        <!-- 응모 완료된 상품 -->
+        <h2 class="section-title">응모 완료된 상품</h2>
+        <div class="product-container">
+            <div class="product-card" th:each="product : ${completedProducts}">
+                <img th:src="@{${product.imageUrl}}" alt="상품 사진">
+                <p th:text="${product.name}">상품명</p>
+                <button disabled>응모 완료</button>
+            </div>
+        </div>
+    </main>
+    
+
+    <th:block th:replace="layout/footer :: footerFragment"></th:block>
+
+</body>
+</html>

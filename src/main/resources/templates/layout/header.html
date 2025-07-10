@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" th:href="@{/css/header.css}" />
+</head>
+<body>
+<div th:fragment="header">
+    <header class="header">
+        <div class="header-left">
+            <a th:href="@{/main-page}" class="header-logo">
+                <img th:src="@{/images/fastpick.png}" alt="FastPick Logo" />
+                <span class="brand-name">FastPick</span>
+            </a>
+        </div>
+        <div class="header-right">
+            <!-- 로그인 상태일 때 -->
+            <div th:if="${loginUser != null}" class="login-info">
+                <span class="username" th:text="${loginUser.name} + '님'"></span>
+                <a th:href="@{/logout}">
+                    <button>로그아웃</button>
+                </a>
+            </div>
+            <!-- 비로그인 상태일 때 -->
+            <div th:if="${loginUser == null}" class="auth-buttons">
+                <a th:href="@{/sign-up}">
+                    <button>회원가입</button>
+                </a>
+                <a th:href="@{/login}">
+                    <button>로그인</button>
+                </a>
+            </div>
+        </div>
+    </header>
+</div>
+</body>
+</html>
+
