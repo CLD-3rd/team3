@@ -9,5 +9,5 @@ public class ProductDto {
     private String name;
     private String imageUrl;
     private Long pidx;
-    
+    private Boolean open;
 }

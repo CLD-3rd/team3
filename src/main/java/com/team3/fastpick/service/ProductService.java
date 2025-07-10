@@ -14,7 +14,7 @@ public class ProductService {
     private final ProductRepository productRepository;
     public List<ProductDto> getAllProducts() {
         return productRepository.findAll().stream()
-                .map(p -> new ProductDto(p.getName(), p.getImageUrl(), p.getPidx()))
+                .map(p -> new ProductDto(p.getName(), p.getImageUrl(), p.getPidx(), p.getOpen()))
                 .collect(Collectors.toList());
     }
 }

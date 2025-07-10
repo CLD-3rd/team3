@@ -20,4 +20,6 @@ public class Product {
     private String name;
     @Column(name="image_url", nullable = false)
     private String imageUrl;
+    @Column(name = "open", nullable = false)
+    private Boolean open; 
 }
