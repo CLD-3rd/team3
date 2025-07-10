@@ -3,7 +3,7 @@ name: Team3 CI - Build and Push Docker Image
 on:
   push:
     branches:
-      # - main
+      - main
       - dev
   workflow_dispatch:
 
