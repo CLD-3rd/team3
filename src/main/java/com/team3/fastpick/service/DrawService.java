@@ -29,7 +29,7 @@ public class DrawService {
     public DrawResponse requestDraw(int productId, int userId) {
         
         String userSetKey = buildUserSetKey(productId);
-        Boolean alreadyParticipated = redisTemplate.opsForSet().isMember(userSetKey, userId);
+        Boolean alreadyParticipated = redisTemplate.opsForSet().isMember(userSetKey, USER_LABEL + userId);
 
         if (Boolean.TRUE.equals(alreadyParticipated)) {
             return new DrawResponse(false, "이미 응모된 사용자입니다.");
