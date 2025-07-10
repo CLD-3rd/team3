@@ -1,5 +1,6 @@
 package com.team3.fastpick.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,13 +21,15 @@ import lombok.NoArgsConstructor;
 public class User {
 
     @Id
+    @Column(name = "uidx")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long uidx;
 
     private String id;         // 사용자 ID (아이디)
     private String password;   // 비밀번호
     private String name;       // 사용자 이름
-    
-    public String getId() { return id; }
 
+    public String getId() {
+        return id;
+    }
 }
