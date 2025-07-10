@@ -1,11 +1,12 @@
 package com.team3.fastpick.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.ui.Model;
+
 import com.team3.fastpick.entity.User;
 import com.team3.fastpick.service.UserService;
 
@@ -46,8 +47,6 @@ public class UserController {
 	    session.invalidate();
 	    return "redirect:/main-page";
 	}
-
-    private final UserService userService;
 
     @GetMapping("/signup")
     public String signupForm() {
