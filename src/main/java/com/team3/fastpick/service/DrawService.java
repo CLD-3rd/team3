@@ -18,14 +18,13 @@ public class DrawService {
     private static final String ATTEMPT_PREFIX = "draw:";             // 응모 기록
     private static final String COUNT_PREFIX = "draw_count:";         // 응모 카운트
     private static final String USER_SET_PREFIX = "draw_users:";       // 유저 중복 방지용
+    private static final String USER_LABEL = "user_";
+    private static final String PRODUCT_LABEL = "product_";
+    private static final String COUNT_LABEL = "count_";
     private static final int MAX_COUNT = 3;
 
     private final RedisTemplate<String, Object> redisTemplate;
     private final ProductRepository productRepository;
-
-//    public DrawService(RedisTemplate<String, Object> redisTemplate) {
-//        this.redisTemplate = redisTemplate;
-//    }
 
     public DrawResponse requestDraw(int productId, int userId) {
         
@@ -52,11 +51,11 @@ public class DrawService {
     }
 
     private String buildCountKey(int productId) {
-        return COUNT_PREFIX + productId;
+        return COUNT_PREFIX + "product_" + productId;
     }
     
     private String buildUserSetKey(int productId) {
-        return USER_SET_PREFIX + productId;
+        return USER_SET_PREFIX + "product_" + productId;
     }
 
     private Long incrementCount(String countKey) {
@@ -68,12 +67,12 @@ public class DrawService {
     }
 
     private void saveUserAttempt(int productId, Long attemptNumber, int userId) {
-        String attemptKey = ATTEMPT_PREFIX + productId + ":" + attemptNumber;
-        redisTemplate.opsForValue().set(attemptKey, String.valueOf(userId));
+        String attemptKey = ATTEMPT_PREFIX + PRODUCT_LABEL + productId + ":" + COUNT_LABEL + attemptNumber;
+        redisTemplate.opsForValue().set(attemptKey, USER_LABEL + String.valueOf(userId));
     }
     
     private void recordUserParticipation(String userSetKey, int userId) {
-        redisTemplate.opsForSet().add(userSetKey, userId);
+        redisTemplate.opsForSet().add(userSetKey, USER_LABEL + userId);
     }
 
 	public DrawInfo getDrawInfo(Long productId) {
