@@ -18,14 +18,17 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "user")
 public class User {
-	
-	@Id
-	@Column(name = "uidx")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long uidx;
-	
-	private String id;
-	private String password;
-	private String name;
 
+    @Id
+    @Column(name = "uidx")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long uidx;
+
+    private String id;         // 사용자 ID (아이디)
+    private String password;   // 비밀번호
+    private String name;       // 사용자 이름
+
+    public String getId() {
+        return id;
+    }
 }
