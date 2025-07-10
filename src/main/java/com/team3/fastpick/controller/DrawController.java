@@ -29,15 +29,28 @@ public class DrawController {
         return "draw";
     }
 	
-	@GetMapping("/draw-page")
+	@GetMapping("/draw-page/{pidx}")
 	public String drawPageForm(HttpSession session, Model model, @PathVariable("pidx") Long pidx) {
 		
 		
-		// 로그인한 사용자 정보 꺼내기
-	    User user = (User) session.getAttribute("loginUser");
-	    if (user != null) {
-	        model.addAttribute("uidx", user.getUidx()); // user의 id만 model에 추가
+//		// 로그인한 사용자 정보 꺼내기
+//	    User user = (User) session.getAttribute("loginUser");
+	    
+	    User loginUser = (User) session.getAttribute("loginUser");
+
+        if (loginUser == null) {
+            // 로그인 안 됐으면 로그인 페이지로 이동
+            return "redirect:/login";
+        }
+        
+        if (loginUser != null) {
+	        model.addAttribute("uidx", loginUser.getUidx()); // user의 id만 model에 추가
 	    }
+	    
+//        // 로그인 되어있으면 응모 처리 진행
+//        System.out.println("응모 처리됨: pidx = " + pidx + ", uid = " + loginUser.getUidx());
+//
+//        return "redirect:/draw-page";
 		
 		DrawInfo drawInfo = drawService.getDrawInfo(pidx);
 		model.addAttribute("drawInfo", drawInfo);

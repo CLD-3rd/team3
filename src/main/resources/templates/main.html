@@ -20,7 +20,7 @@
                 <div class="badge badge-active">NEW</div>
                 <img th:src="@{${product.imageUrl}}" alt="상품 사진">
                 <p th:text="${product.name}">상품명</p>
-                <form th:action="@{'/draw-page/' + ${product.pidx}}" method="post">
+                <form th:action="@{'/draw-page/' + ${product.pidx}}" method="get">
     				<button type="submit">응모하기</button>
 				</form>
 
