@@ -1,6 +1,8 @@
 package com.team3.fastpick.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -29,7 +31,8 @@ public class DrawService {
     public DrawResponse requestDraw(int productId, int userId) {
         
         String userSetKey = buildUserSetKey(productId);
-        Boolean alreadyParticipated = redisTemplate.opsForSet().isMember(userSetKey, userId);
+        
+        Boolean alreadyParticipated = redisTemplate.opsForSet().isMember(userSetKey, USER_LABEL + userId);
 
         if (Boolean.TRUE.equals(alreadyParticipated)) {
             return new DrawResponse(false, "이미 응모된 사용자입니다.");
@@ -48,6 +51,36 @@ public class DrawService {
         // 4. 중복 방지를 위해 유저 ID 저장
         recordUserParticipation(userSetKey, userId); // TTL 설정은 필요시 추가
         return new DrawResponse(true, "당첨됐습니다.");
+    }
+    
+    
+    //7/10 응모버튼 비활성화 김덕중
+    public List<Long> getAppliedProductIdsFromRedis(int uidx) {
+    	    List<Long> appliedProductIds = new ArrayList<>();
+    	    List<Product> allProducts = productRepository.findAll();
+
+    	    for (Product product : allProducts) {
+    	        String userSetKey = USER_SET_PREFIX + "product_" + product.getPidx();
+    	        Boolean isMember = redisTemplate.opsForSet().isMember(userSetKey, USER_LABEL + String.valueOf(uidx));
+    	        if (Boolean.TRUE.equals(isMember)) {
+    	            appliedProductIds.add(product.getPidx());
+    	        }
+    	    }
+
+    	    return appliedProductIds;
+    	}
+    
+    public Long getCurrentDrawCount(int productId) {
+        String countKey = buildCountKey(productId);
+        Object val = redisTemplate.opsForValue().get(countKey);
+        if (val instanceof Long) return (Long) val;
+        if (val instanceof Integer) return ((Integer) val).longValue();
+        if (val instanceof String) return Long.valueOf((String) val);
+        return 0L; 
+    }
+
+    public static int getMaxCount() {
+        return MAX_COUNT;
     }
 
     private String buildCountKey(int productId) {
