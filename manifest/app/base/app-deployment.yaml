@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: argocd-img-deployment
+  name: app-deployment
 spec:
   replicas: 1
   selector:
