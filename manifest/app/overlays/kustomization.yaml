@@ -1,0 +1,16 @@
+resources:
+- ../base
+
+# patchesStrategicMerge
+
+patches:
+- path: prod-patch.yaml
+
+namespace: prod # 네임스페이스 확인
+namePrefix: prod-
+
+# configMapGenerator
+configMapGenerator:
+- name: env-vars        # base에 지정된 configMap의 이름
+  envs:
+    - prod.env          # prod.env 파일 내용 바탕 configMap 생성
