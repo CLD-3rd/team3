@@ -1,0 +1,21 @@
+# argocd-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-img-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: fastpick
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: fastpick
+    spec:
+      containers:
+      - name: argode-img-container
+        image: kimrma370/team3:latest
+        envFrom:
+        - configMapRef:
+            name: prod-env-vars
