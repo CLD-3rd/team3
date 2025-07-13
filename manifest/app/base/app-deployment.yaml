@@ -14,7 +14,7 @@ spec:
         app.kubernetes.io/name: fastpick
     spec:
       containers:
-      - name: argode-img-container
+      - name: argocd-container
         image: kimrma370/team3:latest
         envFrom:
         - configMapRef:
