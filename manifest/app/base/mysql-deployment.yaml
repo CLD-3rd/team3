@@ -17,7 +17,7 @@ spec:
           image: mysql:8.0
           env:
             - name: MYSQL_ROOT_PASSWORD
-              value: 1234
+              value: rootpw
             - name: MYSQL_DATABASE
               value: fastpick
           ports:
