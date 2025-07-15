@@ -31,7 +31,6 @@ public class DrawService {
     public DrawResponse requestDraw(int productId, int userId) {
         
         String userSetKey = buildUserSetKey(productId);
-        
         Boolean alreadyParticipated = redisTemplate.opsForSet().isMember(userSetKey, USER_LABEL + userId);
 
         if (Boolean.TRUE.equals(alreadyParticipated)) {
