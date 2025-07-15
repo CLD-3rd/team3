@@ -76,5 +76,3 @@ public class ProductController {
         return "OK";
     }
 }
-
-}
