@@ -6,8 +6,8 @@ resources:
 patches:
 - path: prod-patch.yaml
 
-namespace: prod # 네임스페이스 확인
-namePrefix: prod-
+namespace: argocd # 네임스페이스 확인
+namePrefix: argocd-
 
 # configMapGenerator
 configMapGenerator:
