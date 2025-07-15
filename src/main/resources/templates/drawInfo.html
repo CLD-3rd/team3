@@ -70,11 +70,41 @@
 				<input type="hidden" name="uidx" th:value="${uidx}"/>
 	        </div>
 	
-	        <button type="submit" class="submit-btn">응모 완료하기</button>
+			<button type="submit" id="submit-btn" class="submit-btn">응모 완료하기</button>
 	    </form>
     </main>
     
     <th:block th:replace="layout/footer :: footerFragment"></th:block>
 
 </body>
+<script>
+  document.getElementById("submit-btn").addEventListener("click", function(e) {
+    e.preventDefault();
+
+    const product_id = document.querySelector('input[name="pidx"]').value;
+    const user_id = document.querySelector('input[name="uidx"]').value;
+    const size = document.querySelector('select[name="size"]').value;
+
+	fetch("/draw", {
+	      method: "POST",
+	      headers: {
+	        "Content-Type": "application/x-www-form-urlencoded"
+	      },
+	      body: new URLSearchParams({
+	        pidx: product_id,
+	        uidx: user_id,
+	        size: size
+	      })
+	    })
+	    .then(response => response.json())
+	    .then(data => {
+	      alert(data.message); 
+		  window.location.href = "/main-page";
+	    })
+	    .catch(error => {
+	      alert("응모 중 오류가 발생했습니다.");
+	    });
+	  });
+</script>
+
 </html>
