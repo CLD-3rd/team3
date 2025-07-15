@@ -44,6 +44,12 @@ public class ProductController {
     public List<ProductDto> getProductsJson() {
         return productService.getAllProducts();
     }
+
+        @ResponseBody
+    @GetMapping("/healthz")
+    public String healthCheck() {
+        return "OK";
+    }
     
 //    @PostMapping("/apply/{pidx}")
 //    public String applyToProduct(@PathVariable Long pidx, HttpSession session) {
