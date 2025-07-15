@@ -70,4 +70,11 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
+        @ResponseBody
+    @GetMapping("/healthz")
+    public String healthCheck() {
+        return "OK";
+    }
+}
+
 }

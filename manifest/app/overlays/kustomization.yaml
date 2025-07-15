@@ -1,0 +1,16 @@
+resources:
+- ../base
+
+# patchesStrategicMerge
+
+patches:
+- path: argocd-patch.yaml
+
+namespace: argocd # 네임스페이스 확인
+namePrefix: argocd-
+
+# configMapGenerator
+configMapGenerator:
+- name: env-vars        # base에 지정된 configMap의 이름
+  envs:
+    - argocd.env          # prod.env 파일 내용 바탕 configMap 생성
